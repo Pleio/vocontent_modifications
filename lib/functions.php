@@ -28,15 +28,27 @@
 		$result = false;
 		
 		if (!empty($user) && elgg_instanceof($user, "user")) {
+			
 			if (elgg_is_active_plugin("simplesaml")) {
 				$saml_source = elgg_get_plugin_setting("saml_source", "vocontent_modifications");
 				$affiliation_attribute = "eduPersonAffiliation";
 				
-				$affiliation_value = simplesaml_get_authentication_user_attribute($saml_source, $affiliation_attribute, $user->getGUID());
+				$affiliation_values = simplesaml_get_authentication_user_attribute($saml_source, $affiliation_attribute, $user->getGUID());
 				
 				// only staff is allowed this validation
-				if (!empty($affiliation_value) && in_array($affiliation_value, array("employee"))) {
-					$result = true;
+				if (!empty($affiliation_values)) {
+					$allowed_affiliations = array("employee");
+					
+					if (!is_array($affiliation_values)) {
+						$affiliation_values = array($affiliation_values);
+					}
+					
+					foreach ($affiliation_values as $affiliation_value) {
+						if (in_array($affiliation_value, $allowed_affiliations)) {
+							$result = true;
+							break;
+						}
+					}
 				}
 			}
 		}
