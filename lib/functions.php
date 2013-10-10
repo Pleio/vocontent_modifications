@@ -94,9 +94,9 @@
 					
 					if (!empty($saml_value)) {
 						if (!stristr($validation_url, "?id=")) {
-							$validation_url .= "?id=" . $saml_value;
+							$validation_url .= "?id=" . $saml_value[0];
 						} else {
-							$validation_url .= $saml_value;
+							$validation_url .= $saml_value[0];
 						}
 						
 						// prepare cURL for the call
