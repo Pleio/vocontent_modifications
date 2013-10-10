@@ -4,6 +4,9 @@
 		$valid = false;
 		
 		if (!empty($user) && elgg_instanceof($user, "user")) {
+			// remove access
+			vocontent_modifications_revoke_access($user);
+			
 			// only SAML employee's are allowed special access
 			if (vocontent_modification_employee_validation($user)) {
 				// first validate SAML attribute / value combination
@@ -17,8 +20,6 @@
 				// add or remove the user from the access list
 				if ($valid) {
 					vocontent_modifications_grant_access($user);
-				} else {
-					vocontent_modifications_revoke_access($user);
 				}
 			}
 		}
