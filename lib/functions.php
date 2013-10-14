@@ -9,18 +9,18 @@
 			
 			// only SAML employee's are allowed special access
 			if (vocontent_modification_employee_validation($user)) {
-				// first validate SAML attribute / value combination
+				// online validation for emplyees
+				$valid = vocontent_modifications_online_validation($user);
+			}
+			
+			// validate SAML attribute / value combination
+			if (!$valid) {
 				$valid = vocontent_modifications_saml_attributes_validation($user);
-				
-				// next online validation
-				if (!$valid) {
-					$valid = vocontent_modifications_online_validation($user);
-				}
-				
-				// add or remove the user from the access list
-				if ($valid) {
-					vocontent_modifications_grant_access($user);
-				}
+			}
+			
+			// add the user to the access list
+			if ($valid) {
+				vocontent_modifications_grant_access($user);
 			}
 		}
 	}
