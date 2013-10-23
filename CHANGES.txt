@@ -1,5 +1,10 @@
 = Version History =
 
+x.x:
+
+- changed: function name to the correct namespace
+- fixed: checking for the SAML attribute fails
+
 1.0 (2013-10-14):
 
 - first release of the plugin

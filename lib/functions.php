@@ -69,7 +69,11 @@
 				if (!empty($saml_source)  && !empty($attribute) && !empty($value)) {
 					$saml_value = simplesaml_get_authentication_user_attribute($saml_source, $attribute, $user->getGUID());
 					
-					if (!empty($saml_value) && ($saml_value == $value)) {
+					if (!is_array($saml_value)) {
+						$saml_value = array($saml_value);
+					}
+					
+					if (in_array($value, $saml_value)) {
 						$result = true;
 					}
 				}
