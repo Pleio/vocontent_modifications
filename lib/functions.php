@@ -8,7 +8,7 @@
 			vocontent_modifications_revoke_access($user);
 			
 			// only SAML employee's are allowed special access
-			if (vocontent_modification_employee_validation($user)) {
+			if (vocontent_modifications_employee_validation($user)) {
 				// online validation for emplyees
 				$valid = vocontent_modifications_online_validation($user);
 			}
@@ -25,7 +25,7 @@
 		}
 	}
 	
-	function vocontent_modification_employee_validation(ElggUser $user) {
+	function vocontent_modifications_employee_validation(ElggUser $user) {
 		$result = false;
 		
 		if (!empty($user) && elgg_instanceof($user, "user")) {
