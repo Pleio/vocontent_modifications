@@ -2,6 +2,7 @@
 
 x.x:
 
+- added: staff to the special content list
 - changed: function name to the correct namespace
 - fixed: checking for the SAML attribute fails
 

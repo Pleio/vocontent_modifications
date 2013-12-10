@@ -38,7 +38,7 @@
 				
 				// only staff is allowed this validation
 				if (!empty($affiliation_values)) {
-					$allowed_affiliations = array("employee");
+					$allowed_affiliations = array("employee", "staff");
 					
 					if (!is_array($affiliation_values)) {
 						$affiliation_values = array($affiliation_values);
