@@ -107,12 +107,9 @@
 						// prepare cURL for the call
 						$ch = curl_init($validation_url);
 						
-						curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-						curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-						curl_setopt($ch, CURLOPT_HEADER, false);
-						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 						curl_setopt($ch, CURLOPT_TIMEOUT, 5); // wait max 5 seconds for response
-						
+						curl_setopt($ch, CURLOPT_USERAGENT, 'PHP ' . phpversion());
+
 						// execute the cURL call
 						curl_exec($ch);
 						$curl_info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
